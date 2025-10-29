@@ -29,7 +29,7 @@ export const analyzeImage = async (imageFile: File): Promise<string> => {
   try {
     const imagePart = await fileToGenerativePart(imageFile);
     const textPart = {
-      text: "针对图片的全方面解读", // "A comprehensive interpretation of the picture"
+      text: "针对图片的全方面解读，请使用 Markdown 格式化你的回应，例如使用标题、列表和粗体字来让排版更精良。",
     };
 
     const response = await ai.models.generateContent({

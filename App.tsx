@@ -2,6 +2,8 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { analyzeImage } from './services/geminiService';
 
+declare const marked: any;
+
 const UploadIcon = () => (
   <svg className="w-12 h-12 mx-auto text-slate-500" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -158,7 +160,7 @@ const App: React.FC = () => {
                 {isLoading && <Spinner />}
                 {error && <p className="text-red-400">{error}</p>}
                 {analysis ? (
-                   <p className="whitespace-pre-wrap">{analysis}</p>
+                   <div dangerouslySetInnerHTML={{ __html: marked.parse(analysis) }} />
                 ) : (
                     !isLoading && !error && <p className="text-slate-500">The analysis of your image will appear here.</p>
                 )}
